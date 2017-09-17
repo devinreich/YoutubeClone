@@ -8,11 +8,22 @@
 
 import UIKit
 
-class VideoCell: UICollectionViewCell {
+class BaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+        
+    }
+}
+
+class VideoCell: BaseCell {
     
     let subtitleTextView: UITextView = {
         let textView = UITextView()
@@ -54,7 +65,9 @@ class VideoCell: UICollectionViewCell {
         return view
     }()
     
-    func setupViews() {
+    override func setupViews() {
+        super.setupViews()
+        
         addSubview(thumbNailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)
@@ -93,9 +106,5 @@ class VideoCell: UICollectionViewCell {
         // subtitle label height constraint
         addConstraint(NSLayoutConstraint(item: subtitleTextView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0, constant: 30))
         
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
