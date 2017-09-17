@@ -12,6 +12,8 @@
 		822454AF1F6B1D8D00C170E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 822454AD1F6B1D8D00C170E7 /* Main.storyboard */; };
 		822454B11F6B1D8D00C170E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 822454B01F6B1D8D00C170E7 /* Assets.xcassets */; };
 		822454B41F6B1D8D00C170E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 822454B21F6B1D8D00C170E7 /* LaunchScreen.storyboard */; };
+		822454BD1F6F185800C170E7 /* Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822454BC1F6F185800C170E7 /* Extentions.swift */; };
+		822454C01F6F18BC00C170E7 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822454BF1F6F18BC00C170E7 /* VideoCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		822454B01F6B1D8D00C170E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		822454B31F6B1D8D00C170E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		822454B51F6B1D8D00C170E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		822454BC1F6F185800C170E7 /* Extentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extentions.swift; sourceTree = "<group>"; };
+		822454BF1F6F18BC00C170E7 /* VideoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,40 @@
 		822454A81F6B1D8D00C170E7 /* YoutubeClone */ = {
 			isa = PBXGroup;
 			children = (
+				822454BE1F6F189600C170E7 /* View */,
+				822454C11F6F18EE00C170E7 /* Controller */,
+				822454BB1F6F182800C170E7 /* Helpers */,
 				822454A91F6B1D8D00C170E7 /* AppDelegate.swift */,
-				822454AB1F6B1D8D00C170E7 /* ViewController.swift */,
 				822454AD1F6B1D8D00C170E7 /* Main.storyboard */,
 				822454B01F6B1D8D00C170E7 /* Assets.xcassets */,
 				822454B21F6B1D8D00C170E7 /* LaunchScreen.storyboard */,
 				822454B51F6B1D8D00C170E7 /* Info.plist */,
 			);
 			path = YoutubeClone;
+			sourceTree = "<group>";
+		};
+		822454BB1F6F182800C170E7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				822454BC1F6F185800C170E7 /* Extentions.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		822454BE1F6F189600C170E7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				822454BF1F6F18BC00C170E7 /* VideoCell.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		822454C11F6F18EE00C170E7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				822454AB1F6B1D8D00C170E7 /* ViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +168,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				822454AC1F6B1D8D00C170E7 /* ViewController.swift in Sources */,
+				822454C01F6F18BC00C170E7 /* VideoCell.swift in Sources */,
 				822454AA1F6B1D8D00C170E7 /* AppDelegate.swift in Sources */,
+				822454BD1F6F185800C170E7 /* Extentions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
