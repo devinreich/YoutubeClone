@@ -75,8 +75,8 @@ class VideoCell: BaseCell {
         return label
     }()
     
-    let userProfileImageView: UIImageView = {
-        let imageView = UIImageView()
+    let userProfileImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.backgroundColor = UIColor.green
         imageView.image = UIImage(named: "taylor_swift_profile")
         imageView.layer.cornerRadius = 22
@@ -85,8 +85,8 @@ class VideoCell: BaseCell {
         return imageView
     }()
     
-    let thumbNailImageView: UIImageView = {
-        let imageView = UIImageView()
+    let thumbNailImageView: CustomImageView = {
+        let imageView = CustomImageView()
         imageView.backgroundColor = UIColor.blue
         imageView.image = UIImage(named: "taylor_swift_blank_space")
         imageView.contentMode = .scaleAspectFill
