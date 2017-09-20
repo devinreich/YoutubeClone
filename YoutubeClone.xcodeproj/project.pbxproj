@@ -18,6 +18,7 @@
 		822454C71F6F545F00C170E7 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822454C61F6F545F00C170E7 /* Video.swift */; };
 		822454C91F70941800C170E7 /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822454C81F70941800C170E7 /* SettingsLauncher.swift */; };
 		822454CB1F709E0700C170E7 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822454CA1F709E0700C170E7 /* SettingCell.swift */; };
+		822454CE1F72D3F600C170E7 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822454CD1F72D3F600C170E7 /* APIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		822454C61F6F545F00C170E7 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		822454C81F70941800C170E7 /* SettingsLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		822454CA1F709E0700C170E7 /* SettingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		822454CD1F72D3F600C170E7 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 		822454A81F6B1D8D00C170E7 /* YoutubeClone */ = {
 			isa = PBXGroup;
 			children = (
+				822454CC1F72D3DA00C170E7 /* APIService */,
 				822454C41F6F544000C170E7 /* Model */,
 				822454BE1F6F189600C170E7 /* View */,
 				822454C11F6F18EE00C170E7 /* Controller */,
@@ -112,6 +115,14 @@
 				822454C61F6F545F00C170E7 /* Video.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		822454CC1F72D3DA00C170E7 /* APIService */ = {
+			isa = PBXGroup;
+			children = (
+				822454CD1F72D3F600C170E7 /* APIService.swift */,
+			);
+			name = APIService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +205,7 @@
 				822454C91F70941800C170E7 /* SettingsLauncher.swift in Sources */,
 				822454AA1F6B1D8D00C170E7 /* AppDelegate.swift in Sources */,
 				822454BD1F6F185800C170E7 /* Extentions.swift in Sources */,
+				822454CE1F72D3F600C170E7 /* APIService.swift in Sources */,
 				822454C31F6F284F00C170E7 /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
