@@ -10,40 +10,12 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    /* var videos: [Video] = {
-        var kanyeChannel = Channel()
-        kanyeChannel.name = "KanyeIsTheBestChannel"
-        kanyeChannel.profileImageName = "kanye_profile"
-        
-        var blankSpaceVideo = Video()
-        blankSpaceVideo.title = "Taylor Swift - Blank Space"
-        blankSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
-        blankSpaceVideo.channel = kanyeChannel
-        blankSpaceVideo.numberOfViews = 1604684607
-        
-        
-        var badBloodVideo = Video()
-        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Kendrick Lamar"
-        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
-        badBloodVideo.channel = kanyeChannel
-        badBloodVideo.numberOfViews = 1604684607
-        
-        return [blankSpaceVideo, badBloodVideo]
-    }() */
-    
-    var videos: [Video]?
-    
-    func fetchVideos() {
-        APIService.sharedInstance.fetchVideos { (videos: [Video]) in
-            self.videos = videos
-            self.collectionView?.reloadData()
-        }
-    }
+    let cellID = "cellID"
+    let trendingID = "trendingCell"
+    let subscriptionID = "subscriptionCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        fetchVideos()
         
         navigationController?.navigationBar.isTranslucent = false
         
@@ -54,19 +26,33 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.titleView = titleLabel
         
         
-        collectionView?.backgroundColor = UIColor.white
         
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellID")
-        
-        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
-        
+        setupCollectionView()
         setupMenuBar()
         setupNavBarButtons()
     }
     
-    let menuBar: MenuBar = {
+    func setupCollectionView() {
+        if let flowlayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowlayout.scrollDirection = .horizontal
+            flowlayout.minimumLineSpacing = 0
+        }
+        
+        collectionView?.backgroundColor = UIColor.white
+        
+        collectionView?.isPagingEnabled = true
+
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingID)
+        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionID)
+    
+        collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+    }
+    
+    lazy var menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.homeController = self
         return mb
     }()
     
@@ -96,8 +82,21 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
     
+    private func setTitleForIndex(index: Int) {
+        if let titleLable = navigationItem.titleView as? UILabel {
+            titleLable.text = "  \(titles[index])"
+        }
+    }
+    
     func handleSearch() {
         print("123")
+    }
+    
+    func scrollToMenuIndexPath(menuIndex: Int) {
+        let indexPath = IndexPath(item: menuIndex, section: 0)
+        collectionView?.scrollToItem(at: indexPath, at: [], animated: true)
+        
+        setTitleForIndex(index: menuIndex)
     }
     
     lazy var settingsLauncher: SettingsLauncher = {
@@ -120,27 +119,38 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.pushViewController(settingViewController, animated: true)
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
+    }
+    
+    let titles = ["Home", "Trending", "Subscriptions", "Account"]
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let index = targetContentOffset.pointee.x / view.frame.width
+        let indexPath = IndexPath(item: Int(index), section: 0)
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+        
+        setTitleForIndex(index: Int(index))
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos?.count ?? 0
+        return 4
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellID", for: indexPath) as! VideoCell
+        if indexPath.item == 1 {
+             return collectionView.dequeueReusableCell(withReuseIdentifier: trendingID, for: indexPath)
+        }
         
-        cell.video = videos?[indexPath.item]
-        
+        if indexPath.item == 2 {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: subscriptionID, for: indexPath)
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let height = (view.frame.width - 32) * (9 / 16) // width - edges times the aspect ratio
-        
-        return CGSize(width: view.frame.width, height: height + 16 + 68) // 16 for space above image view and 68 for the height below it
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+        return CGSize(width: view.frame.width, height: view.frame.height - 50)
     }
 }
